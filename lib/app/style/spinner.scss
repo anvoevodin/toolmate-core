@@ -1,0 +1,23 @@
+@mixin spinner(
+	$borderSize: 1px,
+	$circleSize: 8px,
+	$circleBgColor: var(--color-1000),
+	$circleBarColor: var(--color-active-300),
+	$speed: 0.8s
+) {
+	border: $borderSize solid $circleBgColor;
+	border-top: $borderSize solid $circleBarColor;
+	border-radius: 50%;
+	width: $circleSize;
+	height: $circleSize;
+	animation: spinner-spin $speed linear infinite;
+}
+
+@keyframes spinner-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

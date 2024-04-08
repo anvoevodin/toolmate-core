@@ -1,0 +1,94 @@
+@import '/lib/app/style/root.scss';
+
+#toolmate-root-container {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+}
+
+#toolmate-app {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.toolmate-panel-top {
+	display: flex;
+	align-items: end;
+	height: 26px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-bottom: 1px;
+	background-color: var(--color-200);
+
+	.toolmate-workspaces-list {
+		display: flex;
+		height: 20px;
+
+		.toolmate-workspace-btn {
+			position: relative;
+			height: 100%;
+			color: var(--color-850);
+			padding: 0 20px;
+			display: flex;
+			align-items: center;
+			border-top-left-radius: var(--radius-border-medium);
+			border-top-right-radius: var(--radius-border-medium);
+
+			&.toolmate-active {
+				color: var(--color-1200);
+				background-color: var(--color-400);
+			}
+
+			&:not(.toolmate-active):hover {
+				background-color: var(--color-250);
+			}
+
+			&:not(:first-child) {
+				margin-left: 2px;
+			}
+
+			.toolmate-saving {
+				@include spinner();
+				position: absolute;
+				left: 6px;
+			}
+
+			.toolmate-unsaved {
+				position: absolute;
+				right: 9px;
+				&:after {
+					content: '*';
+				}
+			}
+		}
+	}
+
+	.toolmate-panel-top-extra {
+		flex-grow: 1;
+	}
+
+	.toolmate-settings-list {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		height: 100%;
+
+		select {
+			width: 90px;
+		}
+	}
+}
+
+.toolmate-workspace {
+	position: relative;
+	flex-grow: 1;
+}
+
+.toolmate-btn-plus {
+	margin-left: 4px;
+}

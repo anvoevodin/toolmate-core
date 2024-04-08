@@ -1,0 +1,61 @@
+// Buttons
+
+button,
+input[type='submit'] {
+	background-color: var(--color-300);
+	color: var(--color-950);
+	border: 1px solid var(--color-475);
+	border-radius: var(--radius-border-medium);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: default;
+
+	&.selected {
+		background-color: var(--color-active-100);
+	}
+
+	&:not(.selected) {
+		&:hover {
+			background-color: var(--color-400);
+			border: 1px solid var(--color-500);
+		}
+	}
+}
+
+input[type='submit'] {
+	padding: 4px;
+	border: 1px solid var(--color-475);
+
+	&:hover {
+		background-color: var(--color-400);
+		border: 1px solid var(--color-500);
+	}
+}
+
+// Textarea
+
+textarea {
+	padding: 8px;
+	border: 0;
+	border-radius: var(--radius-border-medium);
+	background-color: var(--color-300);
+	color: var(--color-900);
+	border: 1px solid var(--color-475);
+}
+
+textarea:focus-visible {
+	outline: none;
+}
+
+// Table
+
+table td {
+	user-select: text; // Usually we want to be able to copy text from table cells.
+}
+
+// Code
+
+code {
+	white-space: break-spaces;
+}

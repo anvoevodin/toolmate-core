@@ -1,0 +1,39 @@
+@import '/lib/app/style/root';
+
+.toolmate-area {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--color-400);
+	box-sizing: border-box;
+	border: 1px solid var(--color-100);
+	border-radius: var(--radius-border-large);
+	color: var(--color-900);
+
+	> .toolmate-header {
+		border-top-left-radius: var(--radius-border-large);
+		border-top-right-radius: var(--radius-border-large);
+		background-color: var(--color-400);
+		min-height: 25px;
+		max-height: 25px;
+		margin: 0 4px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		.toolmate-left,
+		.toolmate-right {
+			display: flex;
+			flex-direction: row;
+			justify-content: start;
+			align-items: center;
+		}
+	}
+
+	> .toolmate-content {
+		display: flex;
+		flex-grow: 1;
+		overflow: scroll;
+	}
+}
