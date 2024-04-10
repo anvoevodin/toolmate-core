@@ -1,7 +1,7 @@
 {
 	"name": "@toolmate/core",
 	"description": "Framework for editors.",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "Anatoly Voevodin",
 	"license": "AGPL-3.0",
 	"keywords": [
