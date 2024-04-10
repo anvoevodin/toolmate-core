@@ -26,7 +26,8 @@
 		"build": "tsc --p ./tsconfig-build.json && vite build",
 		"preview": "vite preview",
 		"lint": "prettier --check . && eslint . && tsc --p ./tsconfig-build.json --noEmit",
-		"prettify": "prettier --write ."
+		"prettify": "prettier --write .",
+		"release": "release-it"
 	},
 	"dependencies": {
 		"@kobalte/core": "^0.12.6",
@@ -43,6 +44,7 @@
 		"eslint-plugin-solid": "^0.13.2",
 		"path": "^0.12.7",
 		"prettier": "^3.2.5",
+		"release-it": "^17.1.1",
 		"sass": "^1.72.0",
 		"typescript": "^5.2.2",
 		"vite": "^5.2.0",
