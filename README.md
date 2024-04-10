@@ -1,4 +1,10 @@
-# Setup
+# Toolmate
+
+[![npm version](https://badge.fury.io/js/@toolmate%2Fcore.svg)](https://badge.fury.io/js/@toolmate%2Fcore)
+
+Toolmate itself is just a framework that provides your project with workspaces, areas and tabs. It's meant to be extended by plugins of yours (or of the community) that add new functionality into your toolmate-based editor.
+
+## Setup
 
 Create new npm project, e.g. `my-game-editor`. I suggest to use vite - `npm create vite`.
 
@@ -24,10 +30,6 @@ npm run dev # Works if only you used `npm create vite`. Otherwise use your comma
 ```
 
 ## More info is coming soon
-
-Toolmate itself is just a framework that provides your project with workspaces, areas and tabs. It's meant to be extended by plugins of yours (or of the community) that add new functionality into your toolmate-based editor.
-
-**More info about it will be added here soon.**
 
 ## License
 
