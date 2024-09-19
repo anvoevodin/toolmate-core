@@ -31,7 +31,6 @@
 	},
 	"dependencies": {
 		"@kobalte/core": "^0.12.6",
-		"@tabler/icons-webfont": "^3.1.0",
 		"solid-js": "^1.8.15"
 	},
 	"devDependencies": {
@@ -59,5 +58,8 @@
 	},
 	"bugs": {
 		"url": "https://github.com/anvoevodin/toolmate-core/issues"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }

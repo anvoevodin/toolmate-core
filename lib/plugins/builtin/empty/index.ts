@@ -1,3 +1,4 @@
+import iconBan from '../../../app/icons/ban'
 import type { Plugin } from '../../../types/plugin'
 
 const plugin: Plugin = {
@@ -6,7 +7,7 @@ const plugin: Plugin = {
 			id: 'empty',
 			title: 'Empty',
 			initialState: {},
-			iconName: 'ban',
+			iconOuterHTML: iconBan,
 			render(_act) {
 				const element = document.createElement('p')
 				element.style.margin = '5px'

@@ -2,7 +2,7 @@ import { produce } from 'solid-js/store'
 import { State, AreaState } from '../../../state'
 import { getTabById, getNewTab } from '../tab/helper'
 import { MainContext } from '../../mainContext/types'
-import { Viewport } from '../../../plugins/viewport'
+import { Viewport } from '../../../types/viewport'
 
 export function addNewArea(
 	mainContext: MainContext,

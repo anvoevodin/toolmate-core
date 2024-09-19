@@ -1,4 +1,4 @@
-import { Viewport } from '../plugins/viewport'
+import { Viewport } from './viewport'
 import { Auth } from './auth'
 
 // I had to use "any" instead of "object" here to not trigger the error "Type 'object' is not assignable

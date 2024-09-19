@@ -1,9 +1,11 @@
+import questionMark from '../../../icons/questionMark'
+import { Icon } from '../icon'
 import './style.scss'
 import { Component } from 'solid-js'
 
 export type ButtonSmallProps = {
-	iconName: string
 	onClick: (e: MouseEvent & { currentTarget: HTMLElement; target: Element }) => void
+	iconOuterHTML?: string
 	size?: number
 	class?: string
 }
@@ -18,7 +20,7 @@ export const ButtonSmall: Component<ButtonSmallProps> = (props) => {
 				props.onClick(e)
 			}}
 		>
-			<i class={`ti ti-${props.iconName}`} />
+			<Icon content={props.iconOuterHTML || questionMark} />
 		</button>
 	)
 }

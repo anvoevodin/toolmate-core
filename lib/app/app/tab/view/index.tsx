@@ -3,7 +3,7 @@ import { useMainContext } from '../../../mainContext'
 import { Act } from '../../../../main'
 import { TabState } from '../../../../state'
 import { setViewportState } from '../actions'
-import { Viewport, ViewportInstance } from '../../../../plugins/viewport'
+import { Viewport, ViewportInstance } from '../../../../types/viewport'
 
 type TabProps = {
 	viewport: Viewport

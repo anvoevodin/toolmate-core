@@ -6,7 +6,9 @@ import { TabState } from '../../../../state'
 import { setActiveArea } from '../../workspace/actions'
 import { TabTypeChooser } from '../../tab/view/tabTypeChooser'
 import { ButtonSmall } from '../../components/buttonSmall'
-import { Viewport } from '../../../../plugins/viewport'
+import { Viewport } from '../../../../types/viewport'
+import iconPlus from '../../../icons/plus'
+import iconQuestionMark from '../../../icons/questionMark'
 
 export type AreaProps = {
 	viewports: Map<string, Viewport>
@@ -56,7 +58,9 @@ export const Area: Component<AreaProps> = (props) => {
 							>
 								<ButtonSmall
 									class={tab().id === props.activeTabId ? 'selected' : ''}
-									iconName={props.viewports.get(tab().viewportId)?.iconName || 'question-mark'}
+									iconOuterHTML={
+										props.viewports.get(tab().viewportId)?.iconOuterHTML || iconQuestionMark
+									}
 									onClick={() => {
 										if (props.activeTabId === tab().id) return
 										setAreaTabActive(mainContext, props.id, tab().id)
@@ -68,7 +72,7 @@ export const Area: Component<AreaProps> = (props) => {
 				</div>
 				<div class="toolmate-right">
 					<span class="toolmate-btn-plus">
-						<ButtonSmall iconName="plus" onClick={() => addNewTab(mainContext, props.id)} />
+						<ButtonSmall iconOuterHTML={iconPlus} onClick={() => addNewTab(mainContext, props.id)} />
 					</span>
 				</div>
 			</div>

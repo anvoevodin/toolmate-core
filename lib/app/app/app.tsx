@@ -7,8 +7,9 @@ import { getWorkspaceById } from './workspace/helper'
 import { State } from '../../state'
 import { Area } from './area/view'
 import { addNewArea, addNewTab, setAreaTabViewport } from './area/actions'
-import { Viewport } from '../../plugins/viewport'
+import { Viewport } from '../../types/viewport'
 import { ButtonSmall } from './components/buttonSmall'
+import iconPlus from '../icons/plus'
 
 type AppProps = {
 	viewports: Map<string, Viewport>
@@ -62,7 +63,7 @@ export const App: Component<AppProps> = function (props) {
 						)}
 					</For>
 					<span class="toolmate-btn-plus">
-						<ButtonSmall iconName="plus" size={14} onClick={() => addEmptyWorkspace()} />
+						<ButtonSmall iconOuterHTML={iconPlus} size={14} onClick={() => addEmptyWorkspace()} />
 					</span>
 				</div>
 				<div class="toolmate-panel-top-extra" />

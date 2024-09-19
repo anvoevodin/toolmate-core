@@ -1,6 +1,8 @@
 import { ContextMenu } from '@kobalte/core'
 import { Component, Index, JSX } from 'solid-js'
-import { Viewport } from '../../../../plugins/viewport'
+import { Viewport } from '../../../../types/viewport'
+import { Icon } from '../../components/icon'
+import questionMark from '../../../icons/questionMark'
 
 type TabTypeChooserProps = {
 	viewports: Map<string, Viewport>
@@ -26,10 +28,7 @@ export const TabTypeChooser: Component<TabTypeChooserProps> = (props) => {
 									disabled={viewport().id === props.viewportId}
 								>
 									<ContextMenu.ItemIndicator class="context-menu__item-indicator" forceMount={true}>
-										<i
-											class={`icon ti ti-${viewport().iconName}`}
-											style={{ 'font-size': `14px` }}
-										/>
+										<Icon content={viewport().iconOuterHTML || questionMark} />
 									</ContextMenu.ItemIndicator>
 									{viewport().title}
 								</ContextMenu.Item>

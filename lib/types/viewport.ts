@@ -1,4 +1,4 @@
-import { Act } from '../types/action'
+import { Act } from './action'
 
 export type ViewportInstance = {
 	element: HTMLDivElement
@@ -13,11 +13,11 @@ export type Viewport<State extends object = object> = {
 	id: string
 	title: string
 	/**
-	 * Name of the icon e.g. 'cookie'.
-	 * You can find available icons here https://tabler.io/icons.
+	 * SVG of an icon as a string e.g. "<svg ...>...</svg>".
+	 * You can find available icons here https://tabler.io/icons (use "Copy SVG" button).
 	 */
-	iconName: string
 	initialState: State
+	iconOuterHTML?: string
 	storageFilter?: string[]
 
 	render(act: Act<State>, initialState: State): ViewportInstance

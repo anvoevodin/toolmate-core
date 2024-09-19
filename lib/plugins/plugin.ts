@@ -1,6 +1,6 @@
 import { Plugin } from '../types/plugin'
 import { Auth } from '../types/auth'
-import { Viewport } from './viewport'
+import { Viewport } from '../types/viewport'
 import { EmptyPlugin } from './builtin/empty'
 
 const authsMap: Map<string, Auth> = new Map()
