@@ -23,6 +23,34 @@ input[type='submit'] {
 	}
 }
 
+input[disabled],
+button[disabled] {
+	opacity: 0.5;
+}
+
+button {
+	padding: 4px;
+}
+
+button.warning,
+button[disabled].warning:hover {
+	background-color: var(--color-warning-50);
+	color: var(--color-warning-20);
+	border-color: var(--color-warning-100);
+}
+
+button.warning:hover {
+	background-color: var(--color-warning-65);
+	color: var(--color-warning-20);
+	border-color: var(--color-warning-100);
+}
+
+button[disabled]:hover {
+	background-color: var(--color-300);
+	color: var(--color-950);
+	border: 1px solid var(--color-475);
+}
+
 input[type='submit'] {
 	padding: 4px;
 	border: 1px solid var(--color-475);
@@ -31,6 +59,18 @@ input[type='submit'] {
 		background-color: var(--color-400);
 		border: 1px solid var(--color-500);
 	}
+}
+
+input[type='text'],
+input[type='number'] {
+	background-color: var(--color-300);
+	color: var(--color-950);
+	border: 1px solid var(--color-475);
+
+	width: 100%;
+	padding: 4px;
+	border: 1px solid var(--color-475);
+	outline: 0;
 }
 
 // Textarea
@@ -58,4 +98,7 @@ table td {
 
 code {
 	white-space: break-spaces;
+	display: block;
+	user-select: text;
+	margin: 8px 0;
 }
