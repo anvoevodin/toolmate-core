@@ -1,11 +1,10 @@
 import './app.scss'
-import { Component, createSignal, For, Index, Show } from 'solid-js'
-import { Tab } from './tab/view'
+import { Component, createSignal, For, Show } from 'solid-js'
 import { useMainContext } from '../mainContext'
 import { addNewWorkspace, removeWorkspace, setWorkspaceCurrentId } from './workspace/actions'
 import { getWorkspaceById } from './workspace/helper'
-import { State, WorkspaceState } from '../../state'
-import { Area } from './area/view'
+import { WorkspaceState } from '../../state'
+import { Workspace } from './workspace/view'
 import { addNewArea, addNewTab, setAreaTabViewport } from './area/actions'
 import { Viewport } from '../../types/viewport'
 import { ButtonSmall } from './components/buttonSmall'
@@ -28,7 +27,7 @@ export const App: Component<AppProps> = function (props) {
 
 		addNewWorkspace(mainContext)
 
-		addNewArea(mainContext, mainContext.state.workspaceIdCounter - 1, 0, 0, 100, 100)
+		addNewArea(mainContext, mainContext.state.workspaceIdCounter - 1)
 		addNewTab(mainContext, mainContext.state.areaIdCounter - 1)
 		setAreaTabViewport(mainContext, mainContext.state.tabIdCounter - 1, firstViewport)
 	}
@@ -89,7 +88,13 @@ export const App: Component<AppProps> = function (props) {
 				<div class="toolmate-panel-top-extra" />
 				<div class="toolmate-settings-list" />
 			</div>
-			<div class="toolmate-workspace">{getAreas(state, props.viewports)}</div>
+			<Show
+				when={getWorkspaceById(state, state.currentWorkspaceId)}
+				keyed
+				fallback={<div class="toolmate-workspace" />}
+			>
+				{(workspace) => <Workspace workspace={workspace} viewports={props.viewports} />}
+			</Show>
 			<ConfirmDialog
 				open={closingWorkspace() !== undefined}
 				title={`Close "${closingWorkspace()?.name}"?`}
@@ -106,42 +111,5 @@ export const App: Component<AppProps> = function (props) {
 					: `All ${closingWorkspaceTabsCount()} tabs opened in this workspace will be closed.`}
 			</ConfirmDialog>
 		</div>
-	)
-}
-
-function getAreas(state: State, viewports: Map<string, Viewport>) {
-	const workspace = getWorkspaceById(state, state.currentWorkspaceId)
-	return (
-		<Index each={workspace?.areas}>
-			{(area) => (
-				<Area {...area()} tabs={area().tabs} viewports={viewports}>
-					<Show
-						when={area().tabs.find((tab) => tab.id === area().activeTabId)}
-						fallback={
-							<Show
-								when={area().tabs.length}
-								fallback={<p class="toolmate-no-tabs">No tabs are opened</p>}
-							>
-								<p>The tab "{area().activeTabId}" doesn't exist</p>
-							</Show>
-						}
-					>
-						{(tab) => (
-							<Show
-								when={viewports.get(tab().viewportId)}
-								fallback={
-									<p>
-										The tab "{area().activeTabId}" tries to use unknown viewport"
-										{tab().viewportId}"
-									</p>
-								}
-							>
-								{(viewport) => <Tab viewport={viewport()} state={tab()} />}
-							</Show>
-						)}
-					</Show>
-				</Area>
-			)}
-		</Index>
 	)
 }

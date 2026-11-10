@@ -10,19 +10,33 @@ export type TabState = {
 
 export type AreaState = {
 	id: number
-	top: number
-	left: number
-	width: number
-	height: number
 	activeTabId: number
 	tabs: TabState[]
 }
+
+export type LayoutArea = {
+	type: 'area'
+	areaId: number
+}
+
+export type LayoutSplit = {
+	type: 'split'
+	/** "row" - children are placed from left to right, "column" - from top to bottom. */
+	direction: 'row' | 'column'
+	children: LayoutNode[]
+	/** Fractions of the split's space the children take. The order is the same as in `children`. */
+	sizes: number[]
+}
+
+export type LayoutNode = LayoutArea | LayoutSplit
 
 export type WorkspaceState = {
 	id: number
 	name: string
 	activeAreaId: number
 	areas: AreaState[]
+	/** Tree that describes how the areas are placed. Every area has exactly one leaf here. */
+	layout?: LayoutNode
 }
 
 export type State = {

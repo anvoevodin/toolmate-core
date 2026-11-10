@@ -7,7 +7,6 @@ export function addNewWorkspace(mainContext: MainContext) {
 		produce((s) => {
 			const id = s.workspaceIdCounter++
 			s.workspaces.push({ activeAreaId: 0, areas: [], id, name: `Workspace${id}` })
-			if (s.workspaces.length === 1) s.currentWorkspaceId = id
 			s.currentWorkspaceId = id
 		})
 	)

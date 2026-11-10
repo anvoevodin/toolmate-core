@@ -1,0 +1,109 @@
+.toolmate-splitter {
+	position: absolute;
+	z-index: 2;
+	touch-action: none;
+
+	// The element itself is a line with no thickness, this is its grabbable (and visible when it's hovered) part.
+	&::after {
+		content: '';
+		position: absolute;
+		background-color: transparent;
+		transition: background-color 0.1s;
+	}
+
+	&.toolmate-row {
+		cursor: col-resize;
+
+		&::after {
+			top: 0;
+			bottom: 0;
+			left: -3px;
+			width: 6px;
+		}
+	}
+
+	&.toolmate-column {
+		cursor: row-resize;
+
+		&::after {
+			left: 0;
+			right: 0;
+			top: -3px;
+			height: 6px;
+		}
+	}
+
+	&:hover::after,
+	&.toolmate-active::after {
+		background-color: var(--color-active-300);
+		background-clip: content-box;
+	}
+
+	&.toolmate-row:hover::after,
+	&.toolmate-row.toolmate-active::after {
+		padding: 0 2px;
+		box-sizing: border-box;
+	}
+
+	&.toolmate-column:hover::after,
+	&.toolmate-column.toolmate-active::after {
+		padding: 2px 0;
+		box-sizing: border-box;
+	}
+}
+
+.toolmate-drop-preview {
+	position: absolute;
+	z-index: 3;
+	box-sizing: border-box;
+	pointer-events: none;
+	background-color: rgb(71 114 179 / 0.3);
+	border: 1px solid var(--color-active-500);
+	border-radius: var(--radius-border-large);
+	// Makes the preview "snap" from a side to a side.
+	transition:
+		left 0.08s ease-out,
+		top 0.08s ease-out,
+		width 0.08s ease-out,
+		height 0.08s ease-out;
+}
+
+.toolmate-drop-marker {
+	position: absolute;
+	z-index: 3;
+	pointer-events: none;
+	background-color: var(--color-active-500);
+	border-radius: 1px;
+}
+
+.toolmate-drag-ghost {
+	position: fixed;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	height: 20px;
+	box-sizing: border-box;
+	padding: 0 6px 0 5px;
+	margin: 10px 0 0 12px;
+	white-space: nowrap;
+	pointer-events: none;
+	color: var(--color-1200);
+	background-color: var(--color-active-100);
+	border: 1px solid var(--color-active-300);
+	border-radius: var(--radius-border-medium);
+	opacity: 0.9;
+
+	&.toolmate-no-target {
+		opacity: 0.55;
+	}
+}
+
+body.toolmate-dragging-tab {
+	cursor: grabbing;
+
+	// Nothing should react on the pointer (hover effects etc.) while a tab is being dragged.
+	#toolmate-app {
+		pointer-events: none;
+	}
+}
