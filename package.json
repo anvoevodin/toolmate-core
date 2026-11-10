@@ -30,25 +30,25 @@
 		"release": "release-it"
 	},
 	"dependencies": {
-		"@kobalte/core": "^0.13.12",
-		"solid-js": "^1.9.14"
+		"@kobalte/core": "^0.13.14",
+		"solid-js": "^1.9.18"
 	},
 	"devDependencies": {
-		"@types/node": "^26.1.0",
-		"@typescript-eslint/eslint-plugin": "^8.62.1",
-		"@typescript-eslint/parser": "^8.62.1",
-		"eslint": "^9.39.4",
+		"@eslint/js": "^10.0.1",
+		"@types/node": "^26.6.6",
+		"@typescript-eslint/eslint-plugin": "^8.72.2",
+		"@typescript-eslint/parser": "^8.72.2",
+		"eslint": "^10.14.0",
 		"eslint-config-prettier": "^10.1.8",
-		"eslint-plugin-prettier": "^5.5.6",
-		"eslint-plugin-solid": "^0.14.5",
-		"path": "^0.12.7",
-		"prettier": "^3.9.4",
-		"release-it": "^20.2.1",
-		"sass": "^1.101.0",
+		"eslint-plugin-prettier": "^5.5.7",
+		"eslint-plugin-solid": "^0.19.0",
+		"prettier": "^3.9.10",
+		"release-it": "^21.1.2",
+		"sass": "^1.108.1",
 		"typescript": "^6.0.3",
-		"vite": "^8.1.3",
-		"vite-plugin-dts": "^5.0.3",
-		"vite-plugin-solid": "^2.11.12"
+		"vite": "^8.3.7",
+		"vite-plugin-dts": "^5.1.2",
+		"vite-plugin-solid": "^2.11.15"
 	},
 	"homepage": "https://github.com/anvoevodin/toolmate-core",
 	"url": "https://github.com/anvoevodin/toolmate-core",

@@ -1,4 +1,4 @@
-@import '/lib/app/style/spinner';
+@use './spinner' as *;
 
 :root {
 	--color-100: #161616;
