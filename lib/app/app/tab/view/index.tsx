@@ -1,4 +1,4 @@
-import { Component, createEffect } from 'solid-js'
+import { Component, createEffect, onCleanup } from 'solid-js'
 import { useMainContext } from '../../../mainContext'
 import { Act } from '../../../../main'
 import { TabState } from '../../../../state'
@@ -47,6 +47,11 @@ export const Tab: Component<TabProps> = function (props) {
 			throw new Error(`viewportInstance is ${viewportInstance} in Tab:createEffect`)
 		}
 		viewportInstance.onStateChange(props.state.viewportState)
+	})
+
+	onCleanup(() => {
+		viewportInstance?.destroy()
+		viewportInstance = undefined
 	})
 
 	return <div class="toolmate-content" ref={ref} />

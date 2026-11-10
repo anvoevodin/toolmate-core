@@ -1,6 +1,6 @@
 import './style.scss'
 import { Component, Index, JSX } from 'solid-js'
-import { addNewTab, setAreaTabActive, setAreaTabViewport } from '../actions'
+import { addNewTab, removeTab, setAreaTabActive, setAreaTabViewport } from '../actions'
 import { useMainContext } from '../../../mainContext'
 import { TabState } from '../../../../state'
 import { setActiveArea } from '../../workspace/actions'
@@ -8,7 +8,7 @@ import { TabTypeChooser } from '../../tab/view/tabTypeChooser'
 import { ButtonSmall } from '../../components/buttonSmall'
 import { Viewport } from '../../../../types/viewport'
 import iconPlus from '../../../icons/plus'
-import iconQuestionMark from '../../../icons/questionMark'
+import { TabButton } from './tabButton'
 
 export type AreaProps = {
 	viewports: Map<string, Viewport>
@@ -56,15 +56,15 @@ export const Area: Component<AreaProps> = (props) => {
 								viewportId={tab().viewportId}
 								onChooseTabViewport={(viewport: Viewport) => onChooseTabViewport(tab().id, viewport)}
 							>
-								<ButtonSmall
-									class={tab().id === props.activeTabId ? 'selected' : ''}
-									iconOuterHTML={
-										props.viewports.get(tab().viewportId)?.iconOuterHTML || iconQuestionMark
-									}
+								<TabButton
+									label={props.viewports.get(tab().viewportId)?.title ?? tab().viewportId}
+									iconOuterHTML={props.viewports.get(tab().viewportId)?.iconOuterHTML}
+									isActive={tab().id === props.activeTabId}
 									onClick={() => {
 										if (props.activeTabId === tab().id) return
 										setAreaTabActive(mainContext, props.id, tab().id)
 									}}
+									onClose={() => removeTab(mainContext, props.id, tab().id)}
 								/>
 							</TabTypeChooser>
 						)}

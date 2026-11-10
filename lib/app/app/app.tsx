@@ -1,14 +1,16 @@
 import './app.scss'
-import { Component, For, Index, Show } from 'solid-js'
+import { Component, createSignal, For, Index, Show } from 'solid-js'
 import { Tab } from './tab/view'
 import { useMainContext } from '../mainContext'
-import { addNewWorkspace, setWorkspaceCurrentId } from './workspace/actions'
+import { addNewWorkspace, removeWorkspace, setWorkspaceCurrentId } from './workspace/actions'
 import { getWorkspaceById } from './workspace/helper'
-import { State } from '../../state'
+import { State, WorkspaceState } from '../../state'
 import { Area } from './area/view'
 import { addNewArea, addNewTab, setAreaTabViewport } from './area/actions'
 import { Viewport } from '../../types/viewport'
 import { ButtonSmall } from './components/buttonSmall'
+import { ButtonClose } from './components/buttonClose'
+import { ConfirmDialog } from './components/confirmDialog'
 import iconPlus from '../icons/plus'
 
 type AppProps = {
@@ -39,6 +41,23 @@ export const App: Component<AppProps> = function (props) {
 		setWorkspaceCurrentId(mainContext, workspaceId)
 	}
 
+	const [closingWorkspaceId, setClosingWorkspaceId] = createSignal<number>()
+	const closingWorkspace = () => {
+		const id = closingWorkspaceId()
+		return id === undefined ? undefined : getWorkspaceById(state, id)
+	}
+	const closingWorkspaceTabsCount = () =>
+		closingWorkspace()?.areas.reduce((count, area) => count + area.tabs.length, 0) ?? 0
+
+	const onWorkspaceCloseClick = (workspace: WorkspaceState) => {
+		// Nothing to lose when there are no tabs, so no confirmation is needed.
+		if (workspace.areas.every((area) => area.tabs.length === 0)) {
+			removeWorkspace(mainContext, workspace.id)
+			return
+		}
+		setClosingWorkspaceId(workspace.id)
+	}
+
 	const isSaving = false
 	const hasUnsaved = false
 
@@ -49,7 +68,7 @@ export const App: Component<AppProps> = function (props) {
 					<For each={state.workspaces}>
 						{(workspace) => (
 							<div
-								class={`toolmate-workspace-btn ${workspace.id === state.currentWorkspaceId ? 'toolmate-active' : ''}`}
+								class={`toolmate-workspace-btn toolmate-closable ${workspace.id === state.currentWorkspaceId ? 'toolmate-active' : ''}`}
 								onClick={() => onWorkspaceBtnClick(workspace.id)}
 							>
 								<Show when={isSaving}>
@@ -59,6 +78,7 @@ export const App: Component<AppProps> = function (props) {
 								<Show when={hasUnsaved}>
 									<div class="toolmate-unsaved" />
 								</Show>
+								<ButtonClose title="Close workspace" onClick={() => onWorkspaceCloseClick(workspace)} />
 							</div>
 						)}
 					</For>
@@ -70,6 +90,21 @@ export const App: Component<AppProps> = function (props) {
 				<div class="toolmate-settings-list" />
 			</div>
 			<div class="toolmate-workspace">{getAreas(state, props.viewports)}</div>
+			<ConfirmDialog
+				open={closingWorkspace() !== undefined}
+				title={`Close "${closingWorkspace()?.name}"?`}
+				confirmLabel="Close"
+				onConfirm={() => {
+					const id = closingWorkspaceId()
+					setClosingWorkspaceId(undefined)
+					if (id !== undefined) removeWorkspace(mainContext, id)
+				}}
+				onCancel={() => setClosingWorkspaceId(undefined)}
+			>
+				{closingWorkspaceTabsCount() === 1
+					? 'The tab opened in this workspace will be closed.'
+					: `All ${closingWorkspaceTabsCount()} tabs opened in this workspace will be closed.`}
+			</ConfirmDialog>
 		</div>
 	)
 }
@@ -82,7 +117,14 @@ function getAreas(state: State, viewports: Map<string, Viewport>) {
 				<Area {...area()} tabs={area().tabs} viewports={viewports}>
 					<Show
 						when={area().tabs.find((tab) => tab.id === area().activeTabId)}
-						fallback={<p>The tab "{area().activeTabId}" doesn't exist</p>}
+						fallback={
+							<Show
+								when={area().tabs.length}
+								fallback={<p class="toolmate-no-tabs">No tabs are opened</p>}
+							>
+								<p>The tab "{area().activeTabId}" doesn't exist</p>
+							</Show>
+						}
 					>
 						{(tab) => (
 							<Show

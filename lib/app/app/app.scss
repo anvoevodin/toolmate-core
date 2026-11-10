@@ -66,6 +66,11 @@
 					content: '*';
 				}
 			}
+
+			// The close button takes the place of the "unsaved" mark.
+			&:hover .toolmate-unsaved {
+				display: none;
+			}
 		}
 	}
 

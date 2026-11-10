@@ -1,0 +1,63 @@
+.toolmate-dialog-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	background-color: rgb(0 0 0 / 0.4);
+}
+
+.toolmate-dialog-positioner {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+}
+
+.toolmate-dialog {
+	pointer-events: auto;
+	min-width: 260px;
+	max-width: min(420px, calc(100vw - 32px));
+	padding: 14px;
+	background-color: var(--color-150);
+	border: 1px solid var(--color-375);
+	border-radius: var(--radius-border-large);
+	color: var(--color-1000);
+	outline: none;
+
+	.toolmate-dialog-title {
+		font-size: var(--font-size-middle);
+		font-weight: bold;
+		color: var(--color-1300);
+	}
+
+	.toolmate-dialog-description {
+		margin-top: 8px;
+		line-height: 1.4;
+		color: var(--color-900);
+	}
+
+	.toolmate-dialog-buttons {
+		display: flex;
+		justify-content: end;
+		gap: 6px;
+		margin-top: 14px;
+
+		button {
+			min-width: 64px;
+			padding: 4px 10px;
+			font: inherit;
+			color: var(--color-1200);
+
+			&:focus-visible {
+				outline: 1px solid var(--color-active-500);
+				outline-offset: 1px;
+			}
+
+			&.selected:hover {
+				background-color: var(--color-active-200);
+			}
+		}
+	}
+}

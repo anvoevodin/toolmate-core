@@ -13,6 +13,24 @@ export function addNewWorkspace(mainContext: MainContext) {
 	)
 }
 
+export function removeWorkspace(mainContext: MainContext, id: number) {
+	mainContext.setState(
+		produce((s) => {
+			const index = s.workspaces.findIndex((w) => w.id === id)
+			if (index === -1) {
+				console.warn(`removeWorkspace: workspace with id "${id}" does not exist`)
+				return
+			}
+			s.workspaces.splice(index, 1)
+			if (s.currentWorkspaceId === id) {
+				// Switch to the neighbour: the next one or the previous one if the last one has been removed.
+				const neighbour = s.workspaces[index] ?? s.workspaces[index - 1]
+				s.currentWorkspaceId = neighbour ? neighbour.id : 0
+			}
+		})
+	)
+}
+
 export function setWorkspaceCurrentId(mainContext: MainContext, id: number) {
 	mainContext.setState({ currentWorkspaceId: id })
 }

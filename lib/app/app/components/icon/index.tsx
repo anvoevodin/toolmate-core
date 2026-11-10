@@ -1,11 +1,14 @@
 import { Component, createEffect } from 'solid-js'
 import questionMark from '../../../icons/questionMark'
 
-export const Icon: Component<{ content: string }> = (props) => {
-	const maxSize = 14
+export const Icon: Component<{ content: string; size?: number }> = (props) => {
+	// eslint-disable-next-line solid/reactivity -- The size is not meant to be changed.
+	const maxSize = props.size ?? 14
 	const icon = document.createElement('div')
 	icon.style.width = `${maxSize}px`
 	icon.style.height = `${maxSize}px`
+	icon.style.display = 'flex' // Otherwise the inline svg is aligned by the text baseline and shifts down.
+	icon.style.flexShrink = '0'
 	createEffect(() => {
 		const dummy = document.createElement('div')
 		try {

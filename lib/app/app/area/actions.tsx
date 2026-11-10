@@ -42,6 +42,29 @@ export function addNewTab(mainContext: MainContext, areaId: number) {
 	)
 }
 
+export function removeTab(mainContext: MainContext, areaId: number, tabId: number) {
+	mainContext.setState(
+		produce((state) => {
+			const area = getAreaById(state, areaId)
+			if (!area) {
+				console.warn(`removeTab: area with id "${areaId}" does not exist`)
+				return
+			}
+			const index = area.tabs.findIndex((t) => t.id === tabId)
+			if (index === -1) {
+				console.warn(`removeTab: tab with id "${tabId}" does not exist in the area "${areaId}"`)
+				return
+			}
+			area.tabs.splice(index, 1)
+			if (area.activeTabId === tabId) {
+				// Switch to the neighbour: the next one or the previous one if the last one has been removed.
+				const neighbour = area.tabs[index] ?? area.tabs[index - 1]
+				area.activeTabId = neighbour ? neighbour.id : 0
+			}
+		})
+	)
+}
+
 export function getAreaById(state: State, areaId: number): AreaState | undefined {
 	for (let i = 0; i < state.workspaces.length; i++) {
 		const workspace = state.workspaces[i]
