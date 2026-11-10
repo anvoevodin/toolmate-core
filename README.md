@@ -2,11 +2,19 @@
 
 [![npm version](https://badge.fury.io/js/@toolmate%2Fcore.svg)](https://badge.fury.io/js/@toolmate%2Fcore)
 
-Toolmate itself is just a framework that provides your project with workspaces, areas and tabs. It's meant to be extended by plugins of yours (or of the community) that add new functionality into your toolmate-based editor.
+Toolmate is a framework for building editors. It gives your project workspaces, areas and tabs. Everything else comes from plugins, written by you or by the community.
+
+- A workspace holds one or more areas placed side by side.
+- An area holds one or more tabs.
+- To resize areas, drag the border between them.
+- To split an area, drag a tab to one of its sides.
+- To move a tab, drag it onto the tab bar of another area. To reorder tabs, drag a tab within its own tab bar.
+
+![Toolmate with several areas and tabs](./docs/screenshot.png)
 
 ## Setup
 
-Create new npm project, e.g. `my-game-editor`. I suggest to use vite - `npm create vite`.
+Create a new npm project, e.g. `my-game-editor`. I suggest using Vite: `npm create vite`.
 
 Install Toolmate's core:
 
@@ -14,7 +22,7 @@ Install Toolmate's core:
 npm i @toolmate/core
 ```
 
-In the main script of your newly created project add:
+Add this to the main script of your project:
 
 ```ts
 import '@toolmate/core/style'
@@ -26,11 +34,11 @@ render()
 Run the project:
 
 ```sh
-npm run dev # Works if only you used `npm create vite`. Otherwise use your command to run dev server.
+npm run dev # Works only if you used `npm create vite`. Otherwise use your own command to start the dev server.
 ```
 
 ## More info is coming soon
 
 ## License
 
-Toolmate is [GNU AGPLv3 Licensed](./LICENSE).
+Toolmate is licensed under [GNU AGPLv3](./LICENSE).
